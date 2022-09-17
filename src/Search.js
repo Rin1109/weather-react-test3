@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
+import ReactAnimatedWeather from "react-animated-weather";
 
 export default function Search() {
    const [city, setCity] = useState("");
    const [loaded, setLoaded] = useState(false);
    const [weather, setWeather] = useState({});
+
+   const defaults = {
+      icon: 'CLEAR_DAY',
+      color: 'goldenrod',
+      size: 48,
+      animate: true
+   };
 
    let weatherData = {
       city: "New York",
@@ -92,11 +100,14 @@ export default function Search() {
             <div className="row">
                <div className="col-6">
                <div className="clearfix weather-temperature">
-                  <img
-                     src={weatherData.imgUrl}
-                     alt={weatherData.description}
-                     className="float-left"
-                  />
+                  <div className="float-left">
+                     <ReactAnimatedWeather
+                     icon={defaults.icon}
+                     color={defaults.color}
+                     size={defaults.size}
+                     animate={defaults.animate}
+                        />
+                  </div>
                   <div className="float-left">
                      <strong>{weatherData.temperature}</strong>
                      <span className="units">°C</span>
