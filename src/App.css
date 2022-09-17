@@ -4,6 +4,9 @@
    margin-top:20px;
  }
  
+ .App {
+   width: 500px;
+ }
  .Weather {
    border: 1px solid #ced4da;
    border-radius: 5px;

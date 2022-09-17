@@ -1,10 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./App.css";
 
 export default function Search() {
    const [city, setCity] = useState("");
    const [loaded, setLoaded] = useState(false);
    const [weather, setWeather] = useState({});
+
+   let weatherData = {
+      city: "New York",
+      temperature: 19,
+      date: "Tuesday 10:00",
+      description: "Cloudy",
+      imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
+      humidity: 80,
+      wind: 10
+      };
 
    function displayWeather(response) {
       setLoaded(true);
@@ -40,19 +51,66 @@ export default function Search() {
    if (loaded) {
       return (
       <div>
-         {form}
-         <ul>
-            <li>Temperature: {Math.round(weather.temperature)}°C</li>
-            <li>Description: {weather.description}</li>
-            <li>Humidity: {weather.humidity}%</li>
-            <li>Wind: {weather.wind}km/h</li>
-            <li>
-            <img src={weather.icon} alt={weather.description} />
-            </li>
-         </ul>
+            {form}
+               <div className="overview">
+                  <h1>{city}</h1>
+                     <ul>
+                        <li>Last updated: </li>
+                        <li>{weather.description}</li>
+                     </ul>
+            </div>
+               <div className="row">
+               <div className="col-6">
+                  <div className="clearfix weather-temperature">
+                  <img src={weather.icon} alt={weather.description} />
+                  <div className="float-left">
+                        <strong>{Math.round(weather.temperature)}</strong>
+                        <span className="units">°C</span>
+                  </div>
+               </div>
+               </div>
+               <div className="col-6">
+               <ul>
+                  <li>Humidity: {weather.humidity}%</li>
+                     <li>Wind: {weather.wind} km/h</li>
+               </ul>
+               </div>
+         </div>
       </div>
       );
    } else {
-      return form;
+      return (
+         <div>
+            {form}
+            <div className="overview">
+               <h1>{weatherData.city}</h1>
+               <ul>
+               <li>Last updated: {weatherData.date}</li>
+               <li>{weatherData.description}</li>
+               </ul>
+            </div>
+            <div className="row">
+               <div className="col-6">
+               <div className="clearfix weather-temperature">
+                  <img
+                     src={weatherData.imgUrl}
+                     alt={weatherData.description}
+                     className="float-left"
+                  />
+                  <div className="float-left">
+                     <strong>{weatherData.temperature}</strong>
+                     <span className="units">°C</span>
+                  </div>
+               </div>
+               </div>
+               <div className="col-6">
+               <ul>
+                  <li>Humidity: {weatherData.humidity}%</li>
+                  <li>Wind: {weatherData.wind} km/h</li>
+               </ul>
+               </div>
+            </div>
+         </div>
+         );
    }
 }
