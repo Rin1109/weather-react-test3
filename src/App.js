@@ -6,7 +6,7 @@ function App() {
     <div className="App">
         <Weather />
         <small>
-         <a href="https://github.com/Rin1109/weather-react-test3" target="_blank">Open-source code</a> by Rin Husar
+         <a href="https://github.com/Rin1109/weather-react-test3" target="_blank"  rel="noreferrer">Open-source code</a> by Rin Husar
         </small>
     </div>
   );
